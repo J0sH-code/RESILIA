@@ -114,7 +114,7 @@ The GitHub Actions workflow is located at `.github/workflows/ci.yml`.
 
 It currently:
 
-- Installs backend dependencies and runs `pytest`.
+- Installs backend dependencies and runs `python -m pytest`.
 - Installs frontend dependencies and runs `npm run build`.
 - Runs on pull requests and pushes to `main`.
 
