@@ -35,7 +35,7 @@ The platform combines population, facility, transportation, and hazard data to s
 ## Prerequisites
 
 - Python 3.11 or later
-- Node.js 20 or later
+- Node.js 22 or later
 - npm
 
 ## Backend setup
