@@ -1,0 +1,149 @@
+.panel {
+  gap: 8px;
+}
+
+.demandLabel {
+  font-size: 9px;
+  fill: var(--color-warning);
+}
+
+.afterLabel {
+  font-size: 9px;
+  font-weight: 600;
+  fill: var(--color-brand-700);
+}
+
+.summary {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px 12px;
+  padding: 6px 9px;
+  font-size: 10px;
+  color: var(--color-muted);
+  background: var(--color-surface-alt);
+  border-radius: var(--radius-sm);
+}
+
+.summary strong {
+  font-weight: 600;
+  color: var(--color-brand-700);
+}
+
+.summaryBrand {
+  background: var(--color-brand-50);
+}
+
+/* Planning tools */
+.toolsPanel {
+  gap: 10px;
+}
+
+.metaLink {
+  flex-shrink: 0;
+  font-size: 11px;
+  color: var(--color-muted);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.metaLink:hover {
+  color: var(--color-ink);
+}
+
+.replay {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.eventPicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0;
+  font-size: 11px;
+  color: var(--color-muted);
+  white-space: nowrap;
+  background: none;
+  border: 0;
+}
+
+.eventPicker:hover {
+  color: var(--color-ink);
+}
+
+.projection {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  color: var(--color-muted);
+}
+
+.citizen {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.citizenEmblem {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 48px;
+  background: var(--color-brand-50);
+  border-radius: var(--radius-md);
+}
+
+.citizenContent {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.citizenHeading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.citizenDescription {
+  font-size: 11px;
+  color: var(--color-muted);
+}
+
+.citizenSample {
+  font-size: 10px;
+  color: var(--color-brand-700);
+}
+
+.citizenFooter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px 12px;
+  margin-top: auto;
+  font-size: 9px;
+  color: var(--color-muted);
+}
+
+.citizenFooter a {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-brand-700);
+  text-decoration: none;
+}
+
+.citizenFooter a:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,100 @@
+.panel {
+  gap: 11px;
+}
+
+.columns {
+  display: flex;
+  gap: 18px;
+}
+
+.route {
+  display: flex;
+  flex: 0 1 442px;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.endpoints {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.restrictions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.note {
+  font-size: 10px;
+  color: var(--color-muted);
+}
+
+.shortages {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  gap: 7px;
+  min-width: 0;
+}
+
+.shortagesHeading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.shortagesHeading h3 {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.reviewLink {
+  font-size: 10px;
+  color: var(--color-warning);
+  text-decoration: none;
+}
+
+.reviewLink:hover {
+  text-decoration: underline;
+}
+
+.shortageLine {
+  font-size: 11px;
+  color: var(--color-muted);
+}
+
+.count {
+  margin-left: 4px;
+}
+
+.separator {
+  margin: 0 6px;
+}
+
+.warning {
+  font-size: 10px;
+  color: var(--color-warning);
+}
+
+@media (max-width: 860px) {
+  .columns {
+    flex-direction: column;
+  }
+
+  .columns > [role="separator"] {
+    display: none;
+  }
+}

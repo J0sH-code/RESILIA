@@ -1,0 +1,250 @@
+.caption {
+  font-size: 10px;
+  color: var(--color-muted);
+}
+
+/* Scenario impact */
+.impactPanel {
+  gap: 5px;
+}
+
+.coverage {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px;
+  background: var(--color-brand-50);
+  border-radius: var(--radius-md);
+}
+
+.coverageHeading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.coverageHeading h3 {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-brand-900);
+}
+
+.coverageValues {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 9px;
+  white-space: nowrap;
+}
+
+.coverageValues img {
+  align-self: center;
+}
+
+.coverageBefore {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--color-muted);
+}
+
+.coverageAfter {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--color-brand-700);
+}
+
+.coveragePeople {
+  font-size: 10px;
+  color: var(--color-brand-900);
+}
+
+.coverageBar {
+  position: relative;
+  height: 4px;
+  background: var(--color-brand-100);
+  border-radius: 2px;
+}
+
+.coverageFill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  background: var(--color-brand-700);
+  border-radius: 2px;
+}
+
+.coverageMarker {
+  position: absolute;
+  top: -2px;
+  width: 2px;
+  height: 8px;
+  background: #fff;
+}
+
+.metrics {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin: 0;
+}
+
+.metric {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  height: 24px;
+}
+
+.metric dt {
+  flex: 1 1 0;
+  min-width: 0;
+  font-size: 11px;
+  color: var(--color-muted);
+}
+
+.metric dd {
+  margin: 0;
+  line-height: normal;
+}
+
+.metricBefore,
+.metricAfter {
+  width: 35px;
+  text-align: right;
+}
+
+.metricBefore {
+  font-size: 12px;
+  color: var(--color-muted);
+}
+
+.metricAfter {
+  font-size: 13px;
+  color: var(--color-brand-700);
+}
+
+.metricChange {
+  width: 58px;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: var(--line-height);
+  color: var(--color-brand-700);
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* Rationale */
+.rationalePanel {
+  gap: 8px;
+}
+
+.rationaleText {
+  font-size: 12px;
+  color: var(--color-ink);
+}
+
+.factors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.reviewNote {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  color: var(--color-warning);
+}
+
+/* Investment */
+.investmentPanel {
+  gap: 6px;
+}
+
+.totalRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.total {
+  font-size: 27px;
+  font-weight: 700;
+  color: var(--color-ink);
+}
+
+.breakdown {
+  display: flex;
+  gap: 8px;
+  margin: 0;
+}
+
+.breakdown > div {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.breakdown dt {
+  font-size: 10px;
+  color: var(--color-muted);
+}
+
+.breakdown dd {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.benefitRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--color-muted);
+}
+
+.benefitRow strong {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-brand-700);
+}
+
+.footnote {
+  font-size: 9px;
+  color: var(--color-muted);
+}
+
+/* Project handoff */
+.handoffPanel {
+  gap: 9px;
+  background: var(--color-brand-900);
+  border-color: var(--color-brand-900);
+}
+
+.handoffHeading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.handoffHeading h2 {
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.handoffText {
+  font-size: 11px;
+  color: var(--color-on-brand-muted);
+}
+
+.handoffNote {
+  font-size: 10px;
+  color: var(--color-on-brand-subtle);
+}
