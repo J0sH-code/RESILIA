@@ -1,0 +1,52 @@
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  font-size: 10px;
+  color: var(--color-muted);
+}
+
+.legendItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+}
+
+.legendSwatch {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+}
+
+.chart {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  font-family: var(--font-sans);
+}
+
+.gridline {
+  stroke: var(--color-border);
+  stroke-width: 1;
+  shape-rendering: crispEdges;
+}
+
+.axisLabel {
+  font-size: 9px;
+  fill: var(--color-muted);
+}
+
+.categoryLabel {
+  font-size: 10px;
+  fill: var(--color-muted);
+}
+
+.bar {
+  transition: opacity 120ms ease;
+}
+
+.group:hover .bar {
+  opacity: 0.85;
+}

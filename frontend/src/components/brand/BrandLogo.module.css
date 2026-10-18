@@ -1,0 +1,56 @@
+.logo {
+  position: relative;
+  display: block;
+  flex-shrink: 0;
+  width: 112px;
+  height: 34px;
+}
+
+.markVertical,
+.markHorizontal,
+.markCorner {
+  position: absolute;
+  background: linear-gradient(to right, var(--color-brand-900), var(--color-brand-500));
+}
+
+.markVertical,
+.markHorizontal {
+  border-radius: 5.914px;
+  box-shadow: 0 0.37px 0.739px rgba(0, 0, 0, 0.25);
+}
+
+.markVertical {
+  top: 10.72px;
+  left: 0;
+  width: 7.762px;
+  height: 16.079px;
+}
+
+.markHorizontal {
+  top: 10.53px;
+  left: 0;
+  width: 16.079px;
+  height: 7.762px;
+}
+
+.markCorner {
+  top: 19.03px;
+  left: 8.32px;
+  width: 7.777px;
+  height: 7.777px;
+  border-radius: 0 5.914px 5.914px 5.914px;
+}
+
+.wordmark {
+  position: absolute;
+  top: 4.25px;
+  left: 17.37px;
+  font-family: var(--font-brand);
+  font-size: 23.657px;
+  font-weight: 800;
+  line-height: normal;
+  color: transparent;
+  background: linear-gradient(to right, var(--color-brand-900), var(--color-brand-500) 50%);
+  background-clip: text;
+  -webkit-background-clip: text;
+}

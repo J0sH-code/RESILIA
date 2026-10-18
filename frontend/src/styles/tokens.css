@@ -1,0 +1,61 @@
+/* Design tokens taken from the RESILIA Figma dashboard (node 42:828). */
+:root {
+  /* Brand teal scale */
+  --color-brand-900: #07585e;
+  --color-brand-700: #087e83;
+  --color-brand-500: #1daab4;
+  --color-brand-100: #d0e8e4;
+  --color-brand-50: #e5f3f2;
+
+  /* Neutrals */
+  --color-ink: #20383e;
+  --color-muted: #657b80;
+  --color-subtle: #8a9da1;
+  --color-border: #d9e3e5;
+  --color-surface: #ffffff;
+  --color-surface-alt: #f5f8f8;
+  --color-page: #edf2f3;
+
+  /* Status */
+  --color-warning: #a76a17;
+  --color-warning-bg: #fcf2df;
+  --color-danger: #c55b51;
+  --color-danger-bg: #fbede9;
+  --color-danger-border: #ecc4bc;
+
+  /* Text on dark brand surfaces */
+  --color-on-brand-muted: #bfdbdc;
+  --color-on-brand-subtle: #b5d6d6;
+
+  /* Charts */
+  --color-chart-demand: #d6b87e;
+  --color-chart-existing: #b9c9cd;
+  --color-chart-proposed: var(--color-brand-700);
+
+  /* Map */
+  --color-map-ground: #f1f2ea;
+  --color-map-catchment-15: #85c6b8;
+  --color-map-catchment-30: #c3ded0;
+  --color-map-road-passable: #3d8f70;
+  --color-map-road-flooded: var(--color-danger);
+  --color-map-flood-extent: #e9c7b8;
+  --color-map-label-river: #548693;
+  --color-map-label-flood: #8a6960;
+  --color-map-building: #dce0d4;
+  --color-map-building-agri: #d1d8c3;
+  --color-map-building-edge: #cfd5c8;
+
+  /* Typography */
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --font-brand: "Gantari", var(--font-sans);
+  --line-height: 1.4;
+
+  /* Shape and depth */
+  --radius-xs: 3px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-pill: 999px;
+  --shadow-float: 0 3px 12px rgba(36, 72, 76, 0.09);
+}
