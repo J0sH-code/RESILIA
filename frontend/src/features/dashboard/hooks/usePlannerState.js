@@ -1,8 +1,26 @@
 import { useCallback, useMemo, useState } from "react";
 
+/** Scope levels from widest to narrowest, and the area field each one needs. */
+export const SCOPE_LEVELS = ["regional", "provincial", "municipal", "barangay"];
+const AREA_KEYS = { provincial: "provincePcode", municipal: "municipalityPcode", barangay: "barangayPcode" };
+
+const EMPTY_AREA = { provincePcode: null, municipalityPcode: null, barangayPcode: null };
+
+/** Clears the parts of `area` narrower than `scope`. */
+function trimArea(area, scope) {
+  const depth = SCOPE_LEVELS.indexOf(scope);
+  return Object.fromEntries(
+    Object.entries(AREA_KEYS).map(([level, key]) => [
+      key,
+      SCOPE_LEVELS.indexOf(level) <= depth ? area[key] : null,
+    ]),
+  );
+}
+
 /** Local, in-browser planner selections seeded from the dashboard data. */
 export function usePlannerState(data) {
-  const [scope, setScope] = useState("municipal");
+  const [scope, setScopeState] = useState("regional");
+  const [area, setArea] = useState(EMPTY_AREA);
   const [scenario, setScenario] = useState("flood-100");
   const [layers, setLayers] = useState(() =>
     Object.fromEntries(data.layers.map((layer) => [layer.id, layer.enabled])),
@@ -15,8 +33,21 @@ export function usePlannerState(data) {
     data.thresholds.capacityDeficitPercent,
   );
   const [selectedCandidateId, setSelectedCandidateId] = useState(data.candidates[0].id);
-  const [popupOpen, setPopupOpen] = useState(true);
+  const [focusedFacilityId, setFocusedFacilityId] = useState(null);
   const [horizon, setHorizon] = useState(data.planningTools.horizon);
+
+  /** Changing the scope keeps wider selections and drops narrower ones. */
+  const setScope = useCallback((nextScope) => {
+    setScopeState(nextScope);
+    setArea((current) => trimArea(current, nextScope));
+  }, []);
+
+  /** Selects an area and moves the scope to its level. */
+  const selectArea = useCallback((nextArea, level) => {
+    setArea(trimArea({ ...EMPTY_AREA, ...nextArea }, level));
+    setScopeState(level);
+    setFocusedFacilityId(null);
+  }, []);
 
   const toggleLayer = useCallback(
     (id) => setLayers((current) => ({ ...current, [id]: !current[id] })),
@@ -26,10 +57,6 @@ export function usePlannerState(data) {
     (id) => setVulnerableGroups((current) => ({ ...current, [id]: !current[id] })),
     [],
   );
-  const selectCandidate = useCallback((id) => {
-    setSelectedCandidateId(id);
-    setPopupOpen(true);
-  }, []);
 
   const activeScenario = useMemo(
     () => data.scenarios.find((option) => option.value === scenario),
@@ -43,6 +70,8 @@ export function usePlannerState(data) {
   return {
     scope,
     setScope,
+    area,
+    selectArea,
     scenario,
     setScenario,
     activeScenario,
@@ -55,9 +84,9 @@ export function usePlannerState(data) {
     capacityDeficit,
     setCapacityDeficit,
     selectedCandidate,
-    selectCandidate,
-    popupOpen,
-    setPopupOpen,
+    selectCandidate: setSelectedCandidateId,
+    focusedFacilityId,
+    setFocusedFacilityId,
     horizon,
     setHorizon,
   };

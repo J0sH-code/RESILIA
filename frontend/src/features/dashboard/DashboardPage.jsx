@@ -1,6 +1,5 @@
 import { useState } from "react";
 
-import AccessibilityMap from "./components/AccessibilityMap/AccessibilityMap.jsx";
 import AppHeader, { WORKSPACE_TABS } from "./components/AppHeader/AppHeader.jsx";
 import CandidateSitesPanel from "./components/PlanningControls/CandidateSitesPanel.jsx";
 import GapThresholdsPanel from "./components/PlanningControls/GapThresholdsPanel.jsx";
@@ -9,6 +8,7 @@ import InvestmentPanel from "./components/ScenarioInsights/InvestmentPanel.jsx";
 import ProjectHandoffPanel from "./components/ScenarioInsights/ProjectHandoffPanel.jsx";
 import ScenarioImpactPanel from "./components/ScenarioInsights/ScenarioImpactPanel.jsx";
 import SiteRationalePanel from "./components/ScenarioInsights/SiteRationalePanel.jsx";
+import RegionMap from "./components/RegionMap/RegionMap.jsx";
 import ScopeBar from "./components/ScopeBar/ScopeBar.jsx";
 import SupplyRoutingPanel from "./components/SupplyRoutingPanel/SupplyRoutingPanel.jsx";
 import CapacitySurgePanel from "./components/SurgeAnalytics/CapacitySurgePanel.jsx";
@@ -16,6 +16,7 @@ import PlanningToolsPanel from "./components/SurgeAnalytics/PlanningToolsPanel.j
 import TravelTimePanel from "./components/SurgeAnalytics/TravelTimePanel.jsx";
 import { formatNumber } from "./format.js";
 import { useDashboardData } from "./hooks/useDashboardData.js";
+import { useMapData } from "./hooks/useMapData.js";
 import { usePlannerState } from "./hooks/usePlannerState.js";
 import styles from "./DashboardPage.module.css";
 
@@ -35,9 +36,32 @@ export default function DashboardPage() {
   return <PlanningConsole data={data} />;
 }
 
+/** Breadcrumb for the workspace heading, from widest to narrowest area. */
+function areaContext(mapData) {
+  if (mapData.status !== "ready") return ["Loading Region III…"];
+  const { region, provinces, municipalities, province, municipality, barangay } = mapData;
+  if (barangay) return ["Region III", barangay.properties.province, barangay.properties.municipality, barangay.properties.name];
+  if (municipality) {
+    const p = municipality.properties;
+    return ["Region III", p.province, p.name, `${formatNumber(p.barangay_count)} barangays`];
+  }
+  if (province) {
+    const p = province.properties;
+    return ["Region III", p.name, `${p.municipality_count} cities & municipalities`, `${formatNumber(p.barangay_count)} barangays`];
+  }
+  return [
+    region.properties.name,
+    `${provinces.length} provinces`,
+    `${municipalities.length} cities & municipalities`,
+    `${formatNumber(region.properties.barangay_count)} barangays`,
+  ];
+}
+
 function PlanningConsole({ data }) {
   const [activeTab, setActiveTab] = useState("console");
   const planner = usePlannerState(data);
+  const mapData = useMapData(planner.area);
+  const context = areaContext(mapData);
   const { workspace } = data;
   const impactCandidate = data.candidates.find(
     (candidate) => candidate.id === data.impact.candidateId,
@@ -54,7 +78,10 @@ function PlanningConsole({ data }) {
           scenarios={data.scenarios}
           scenario={planner.scenario}
           onScenarioChange={planner.setScenario}
-          locality={workspace.locality}
+          mapData={mapData}
+          area={planner.area}
+          onSelectArea={planner.selectArea}
+          onFocusFacility={planner.setFocusedFacilityId}
         />
       </header>
 
@@ -67,9 +94,12 @@ function PlanningConsole({ data }) {
                 <span className={styles.scenarioStatus}>{workspace.scenarioStatus}</span>
               </div>
               <p className={styles.context}>
-                {workspace.municipality} <span aria-hidden="true">/</span>{" "}
-                {workspace.barangayCount} barangays <span aria-hidden="true">/</span>{" "}
-                {formatNumber(workspace.residentCount)} residents
+                {context.map((part, index) => (
+                  <span key={part} className={styles.contextPart}>
+                    {index > 0 && <span aria-hidden="true">/</span>}
+                    {part}
+                  </span>
+                ))}
               </p>
             </div>
 
@@ -79,6 +109,10 @@ function PlanningConsole({ data }) {
                   layers={data.layers}
                   layerState={planner.layers}
                   onToggleLayer={planner.toggleLayer}
+                  counts={{
+                    hospitals: mapData.facilities?.hospital.length,
+                    schools: mapData.facilities?.school.length,
+                  }}
                   vulnerability={data.vulnerability}
                   vulnerableGroups={planner.vulnerableGroups}
                   onToggleGroup={planner.toggleVulnerableGroup}
@@ -99,14 +133,14 @@ function PlanningConsole({ data }) {
               </div>
 
               <div className={`${styles.column} ${styles.mapColumn}`}>
-                <AccessibilityMap
-                  data={data}
+                <RegionMap
+                  mapData={mapData}
+                  scope={planner.scope}
+                  area={planner.area}
+                  onSelectArea={planner.selectArea}
                   layers={planner.layers}
                   scenario={planner.activeScenario}
-                  selectedCandidate={planner.selectedCandidate}
-                  onSelectCandidate={planner.selectCandidate}
-                  popupOpen={planner.popupOpen}
-                  onPopupOpenChange={planner.setPopupOpen}
+                  focusedFacilityId={planner.focusedFacilityId}
                 />
                 <SupplyRoutingPanel className={styles.grow} route={data.supplyRoute} />
               </div>
