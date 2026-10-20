@@ -8,6 +8,7 @@ export default function CandidateSitesPanel({ candidates, selectedId, onSelect, 
     <Panel aria-labelledby="candidate-sites-title" className={`${styles.compact} ${className}`}>
       <PanelHeading
         id="candidate-sites-title"
+        demo
         icon={mapPinIcon}
         title="Ranked candidate sites"
         meta={`${candidates.length} sites`}

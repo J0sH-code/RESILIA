@@ -20,7 +20,7 @@ export default function GapThresholdsPanel({
 
   return (
     <Panel aria-labelledby="gap-thresholds-title">
-      <PanelHeading id="gap-thresholds-title" icon={slidersIcon} title="Gap thresholds" />
+      <PanelHeading id="gap-thresholds-title" icon={slidersIcon} title="Gap thresholds" demo />
 
       <div className={styles.settingRow}>
         <span className={styles.settingLabel}>Max. emergency travel time</span>

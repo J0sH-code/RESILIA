@@ -14,6 +14,7 @@ export default function InvestmentPanel({ investment }) {
     <Panel aria-labelledby="investment-title" className={styles.investmentPanel}>
       <PanelHeading
         id="investment-title"
+        demo
         icon={landmarkIcon}
         title="Indicative investment"
         meta={`${investment.currency} · demo`}

@@ -14,6 +14,7 @@ export default function ScenarioImpactPanel({ impact, candidate }) {
     <Panel aria-labelledby="scenario-impact-title" className={styles.impactPanel}>
       <PanelHeading
         id="scenario-impact-title"
+        demo
         icon={chartIcon}
         title="Scenario impact"
         meta={`Candidate ${String(candidate.rank).padStart(2, "0")}`}
