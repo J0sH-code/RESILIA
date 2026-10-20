@@ -58,8 +58,8 @@
   word-spacing: 1px;
 }
 
-.context span {
-  margin: 0 4px;
+.contextPart > span {
+  margin: 0 6px;
 }
 
 /* Three-column planning grid: 280 / fluid / 384 at the 1680 px design width */

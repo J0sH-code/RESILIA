@@ -1,0 +1,372 @@
+.panel {
+  gap: 0;
+  padding: 0;
+}
+
+/* Toolbar */
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 12px;
+  min-height: 48px;
+  padding: 9px 14px;
+}
+
+.toolbarTitle {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+}
+
+.toolbarTitle h2 {
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.toolbarActions {
+  display: flex;
+  gap: 6px;
+}
+
+/* Map viewport */
+.viewport {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  aspect-ratio: 944 / 530;
+  min-height: 360px;
+  background: var(--color-map-ground);
+}
+
+.map {
+  width: 100%;
+  height: 100%;
+  font-family: var(--font-sans);
+  background: var(--color-map-ground);
+}
+
+.placing .map {
+  cursor: crosshair;
+}
+
+/* Leaflet paths (SVG): CSS overrides Leaflet's presentation attributes */
+.regionOutline {
+  fill: none;
+  stroke: var(--color-brand-900);
+  stroke-width: 2.5;
+}
+
+.child {
+  fill: var(--color-brand-500);
+  fill-opacity: 0.06;
+  stroke: var(--color-brand-700);
+  stroke-width: 1;
+  stroke-opacity: 0.8;
+  cursor: pointer;
+  transition: fill-opacity 120ms ease;
+}
+
+.child:hover {
+  fill-opacity: 0.22;
+}
+
+.childSelected {
+  fill: var(--color-brand-500);
+  fill-opacity: 0.3;
+  stroke: var(--color-brand-900);
+  stroke-width: 2.5;
+  cursor: pointer;
+}
+
+.sibling {
+  fill: var(--color-surface);
+  fill-opacity: 0.35;
+  stroke: var(--color-muted);
+  stroke-width: 0.8;
+  stroke-dasharray: 3 3;
+  cursor: pointer;
+}
+
+.sibling:hover {
+  fill-opacity: 0.1;
+}
+
+.selectedOutline {
+  fill: none;
+  stroke: var(--color-brand-900);
+  stroke-width: 3;
+}
+
+.placing .child,
+.placing .childSelected,
+.placing .sibling {
+  cursor: crosshair;
+}
+
+/* Markers */
+.markerBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.zoomedOut .hospitalPin {
+  width: 9px;
+  height: 9px;
+  border-width: 2px;
+  border-radius: 2px;
+  box-shadow: none;
+}
+
+.zoomedOut .hospitalPin img {
+  display: none;
+}
+
+.hospitalPin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-brand-700);
+  border-radius: 5px;
+  box-shadow: var(--shadow-float);
+}
+
+.draftPin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--color-brand-900);
+  background: var(--color-surface);
+  border: 1.5px dashed var(--color-brand-900);
+  border-radius: 20px;
+}
+
+/* Leaflet popups, tooltips and controls in the design language */
+.map :global(.leaflet-popup-content-wrapper),
+.map :global(.leaflet-tooltip) {
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-float);
+}
+
+.map :global(.leaflet-tooltip) {
+  font-size: 11px;
+  border-color: var(--color-border);
+}
+
+.map :global(.leaflet-popup-content) {
+  margin: 10px 12px;
+  font-size: 11px;
+  line-height: var(--line-height);
+}
+
+.map :global(.resilia-map-popup) {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  color: var(--color-muted);
+}
+
+.map :global(.resilia-map-popup strong) {
+  font-size: 13px;
+  color: var(--color-ink);
+}
+
+.map :global(.resilia-map-popup a) {
+  margin-top: 4px;
+  color: var(--color-brand-700);
+}
+
+.map :global(.resilia-map-hint) {
+  font-size: 10px;
+  color: var(--color-muted);
+}
+
+.map :global(.leaflet-control-attribution) {
+  font-size: 9px;
+}
+
+/* Map chrome above Leaflet panes */
+.statusStack,
+.mapTools,
+.areaChip {
+  position: absolute;
+  z-index: 1000;
+}
+
+.statusStack {
+  top: 14px;
+  left: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  max-width: calc(100% - 80px);
+  pointer-events: none;
+}
+
+.mapStatus,
+.hazardStatus {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  padding: 7px 10px;
+  font-size: 10px;
+  border-radius: 5px;
+  box-shadow: var(--shadow-float);
+}
+
+.mapStatus {
+  color: var(--color-muted);
+  background: var(--color-surface);
+}
+
+.hazardStatus {
+  gap: 6px;
+  font-weight: 600;
+  color: var(--color-danger);
+  background: var(--color-danger-bg);
+  border: 1px solid var(--color-danger-border);
+}
+
+.mapTools {
+  top: 16px;
+  right: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mapTool {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 5px;
+}
+
+.mapTool:hover {
+  background: var(--color-surface-alt);
+}
+
+.areaChip {
+  bottom: 16px;
+  left: 14px;
+  max-width: calc(100% - 28px);
+  padding: 7px 12px;
+  background: var(--color-brand-900);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-float);
+  pointer-events: none;
+}
+
+.areaChip p {
+  display: flex;
+  flex-direction: column;
+}
+
+.areaChip strong {
+  font-size: 11px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.areaChip span {
+  font-size: 10px;
+  color: var(--color-on-brand-subtle);
+}
+
+/* Legend */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 16px;
+  min-height: 44px;
+  padding: 8px 14px;
+  font-size: 10px;
+  color: var(--color-muted);
+}
+
+.legendTitle {
+  font-weight: 700;
+}
+
+.legendItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+}
+
+.legendLine {
+  width: 14px;
+  height: 0;
+  border-top: 2.5px solid var(--color-brand-900);
+}
+
+.legendSelected {
+  border-top-width: 3px;
+}
+
+.legendRegion {
+  border-top-style: solid;
+  opacity: 0.8;
+}
+
+.legendArea {
+  width: 12px;
+  height: 8px;
+  background: color-mix(in srgb, var(--color-brand-500) 22%, transparent);
+  border: 1px solid var(--color-brand-700);
+  border-radius: 2px;
+}
+
+.legendDot {
+  width: 8px;
+  height: 8px;
+  background: var(--color-brand-700);
+  border: 1px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px var(--color-border);
+}
+
+.legendDraft {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  font-size: 8px;
+  font-weight: 700;
+  color: var(--color-brand-900);
+  border: 1px dashed var(--color-brand-900);
+  border-radius: 50%;
+}
+
+.legendMuted {
+  color: var(--color-subtle);
+  font-style: italic;
+}
+
+@media (max-width: 640px) {
+  .hazardStatus {
+    display: none;
+  }
+}

@@ -33,6 +33,7 @@ export default function TravelTimePanel({ bins, totalResidents }) {
     <Panel aria-labelledby="travel-time-title" className={styles.panel}>
       <PanelHeading
         id="travel-time-title"
+        demo
         icon={timerIcon}
         title="Travel-time histogram"
         meta={`${formatNumber(totalResidents)} residents`}

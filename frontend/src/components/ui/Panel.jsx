@@ -1,3 +1,4 @@
+import Badge from "./Badge.jsx";
 import Icon from "./Icon.jsx";
 import styles from "./Panel.module.css";
 
@@ -9,7 +10,11 @@ export function Panel({ as: Tag = "section", className = "", children, ...rest }
   );
 }
 
-export function PanelHeading({ icon, title, meta, id, children }) {
+/**
+ * `demo` marks a panel whose numbers are synthetic placeholders, so they are
+ * never mistaken for analysis results.
+ */
+export function PanelHeading({ icon, title, meta, id, demo = false, children }) {
   return (
     <div className={styles.heading}>
       {icon && <Icon src={icon} />}
@@ -18,6 +23,11 @@ export function PanelHeading({ icon, title, meta, id, children }) {
       </h2>
       {meta && <p className={styles.meta}>{meta}</p>}
       {children}
+      {demo && (
+        <Badge tone="warning" title="Synthetic demo values until the backend analysis exists">
+          DEMO
+        </Badge>
+      )}
     </div>
   );
 }

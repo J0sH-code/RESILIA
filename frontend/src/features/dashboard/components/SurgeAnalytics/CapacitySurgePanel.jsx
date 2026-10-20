@@ -45,6 +45,7 @@ export default function CapacitySurgePanel({ rows }) {
     <Panel aria-labelledby="capacity-surge-title" className={styles.panel}>
       <PanelHeading
         id="capacity-surge-title"
+        demo
         icon={chartColumnIcon}
         title="Evacuation capacity under surge"
         meta={`${rows.length} surrounding barangays`}

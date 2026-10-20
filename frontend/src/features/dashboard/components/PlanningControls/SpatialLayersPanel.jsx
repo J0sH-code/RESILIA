@@ -25,15 +25,23 @@ const LAYER_ICONS = {
   roads: routeIcon,
 };
 
+/** Right-hand value of a layer row: a live count, the source, or "no data". */
+function layerMeta(layer, counts) {
+  if (!layer.available) return "no data";
+  if (layer.id in counts) return counts[layer.id] == null ? "…" : formatNumber(counts[layer.id]);
+  return layer.source;
+}
+
 export default function SpatialLayersPanel({
   layers,
   layerState,
   onToggleLayer,
+  counts,
   vulnerability,
   vulnerableGroups,
   onToggleGroup,
 }) {
-  const activeCount = layers.filter((layer) => layerState[layer.id]).length;
+  const activeCount = layers.filter((layer) => layer.available && layerState[layer.id]).length;
 
   return (
     <Panel aria-labelledby="spatial-layers-title">
@@ -48,26 +56,30 @@ export default function SpatialLayersPanel({
       <ul className={styles.layerList}>
         {layers.map((layer) => (
           <li key={layer.id}>
-            <label className={styles.layerRow}>
+            <label
+              className={styles.layerRow}
+              title={layer.available ? `Source: ${layer.source}` : `Needs data: ${layer.source}`}
+            >
               <input
                 type="checkbox"
                 className={styles.checkboxInput}
-                checked={layerState[layer.id]}
+                checked={layer.available && layerState[layer.id]}
+                disabled={!layer.available}
                 onChange={() => onToggleLayer(layer.id)}
               />
               <span className={styles.checkbox} aria-hidden="true">
-                {layerState[layer.id] && <Icon src={checkIcon} />}
+                {layer.available && layerState[layer.id] && <Icon src={checkIcon} />}
               </span>
               <Icon src={LAYER_ICONS[layer.id]} />
               <span className={styles.layerLabel}>{layer.label}</span>
-              <span className={styles.layerMeta}>{layer.meta}</span>
+              <span className={styles.layerMeta}>{layerMeta(layer, counts)}</span>
             </label>
           </li>
         ))}
       </ul>
 
       <Divider />
-      <PanelHeading icon={accessibilityIcon} title="Vulnerability overlay" />
+      <PanelHeading icon={accessibilityIcon} title="Vulnerability overlay" demo />
       <div className={styles.chips} role="group" aria-label="Priority groups">
         {vulnerability.groups.map((group) => {
           const on = vulnerableGroups[group.id];

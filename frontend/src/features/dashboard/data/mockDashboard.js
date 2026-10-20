@@ -1,7 +1,10 @@
 /**
- * Demo dataset for the planning console, transcribed from the RESILIA Figma
- * dashboard. Everything here is synthetic. Map coordinates are pixels on the
- * 944 × 530 illustrative map canvas, not real geography.
+ * Dashboard data that does not come from the map files yet.
+ *
+ * Map geography (boundaries, hospitals, schools) is real and loaded through
+ * ../api/mapApi.js. Everything analytical below (candidates, impact, charts,
+ * costs, routing) is SYNTHETIC demo data, transcribed from the Figma design,
+ * until the backend analysis endpoints exist.
  *
  * Keep this shape stable: it is the contract a future FastAPI
  * `/api/dashboard` endpoint is expected to return (see ../api/dashboardApi.js).
@@ -10,13 +13,10 @@ export const mockDashboard = {
   workspace: {
     title: "Spatial accessibility planner",
     scenarioStatus: "DRAFT SCENARIO · 04",
-    municipality: "Illustrative municipality",
-    barangayCount: 12,
     residentCount: 50000,
-    locality: "San Isidro · Demo",
-    version: "RESILIA / PLANNING PREVIEW 1.0",
+    version: "RESILIA / PLANNING PREVIEW 1.1",
     disclaimer:
-      "DEMO WORKSPACE — Synthetic geography, facility inventory and model outputs. Not for operational dispatch or investment approval.",
+      "Map: boundaries PSA/NAMRIA via OCHA HDX, facilities and basemap © OpenStreetMap contributors. Panels marked DEMO show synthetic outputs. Not for operational dispatch or investment approval.",
   },
 
   planner: { initials: "MP", govSyncConnected: false },
@@ -34,15 +34,17 @@ export const mockDashboard = {
     { value: "earthquake", label: "Earthquake hazard", mapBadge: "EARTHQUAKE", flooding: false },
   ],
 
+  // `available: false` = no dataset loaded yet; the row is shown but disabled.
+  // `source` names the dataset the team plans to use (see DASHBOARD.md).
   layers: [
-    { id: "hospitals", label: "Hospitals", meta: "03", enabled: true },
-    { id: "evacuation", label: "Evacuation centers", meta: "08", enabled: true },
-    { id: "schools", label: "Schools", meta: "14", enabled: true },
-    { id: "flood", label: "Flood hazard", meta: "100 yr", enabled: true },
-    { id: "landslide", label: "Landslide hazard", meta: "—", enabled: false },
-    { id: "earthquake", label: "Earthquake hazard", meta: "—", enabled: false },
-    { id: "population", label: "Population density", meta: "/ km²", enabled: true },
-    { id: "roads", label: "Road network", meta: "126 km", enabled: true },
+    { id: "hospitals", label: "Hospitals", enabled: true, available: true, source: "OpenStreetMap" },
+    { id: "evacuation", label: "Evacuation centers", enabled: false, available: false, source: "LGU / DSWD list" },
+    { id: "schools", label: "Schools", enabled: true, available: true, source: "OpenStreetMap" },
+    { id: "flood", label: "Flood hazard", enabled: false, available: false, source: "MGB / GeoRiskPH" },
+    { id: "landslide", label: "Landslide hazard", enabled: false, available: false, source: "MGB" },
+    { id: "earthquake", label: "Earthquake hazard", enabled: false, available: false, source: "PHIVOLCS" },
+    { id: "population", label: "Population density", enabled: false, available: false, source: "PSA census" },
+    { id: "roads", label: "Road network", enabled: true, available: true, source: "OSM basemap" },
   ],
 
   vulnerability: {
@@ -64,8 +66,8 @@ export const mockDashboard = {
     capacityDeficitPercent: 20,
   },
 
-  // Only candidate 01 has modeled simulation outputs (catchments, impact,
-  // investment). Details for candidates 02–03 are placeholder demo values.
+  // DEMO: synthetic candidates (no real locations). Only candidate 01 has
+  // simulated outputs; details for candidates 02–03 are placeholders.
   candidates: [
     {
       id: "candidate-01",
@@ -77,7 +79,6 @@ export const mockDashboard = {
       capacity: 600,
       areaHa: 1.8,
       hazardNote: "outside modeled flood extent",
-      pin: { x: 412, y: 246 },
       simulated: true,
     },
     {
@@ -90,7 +91,6 @@ export const mockDashboard = {
       capacity: 450,
       areaHa: 1.1,
       hazardNote: "outside modeled flood extent",
-      pin: { x: 255, y: 129 },
       simulated: false,
     },
     {
@@ -103,31 +103,8 @@ export const mockDashboard = {
       capacity: 380,
       areaHa: 0.9,
       hazardNote: "near flood extent fringe",
-      pin: { x: 785, y: 334 },
       simulated: false,
     },
-  ],
-
-  existingFacilities: [
-    { id: "evac-santa-elena", type: "evacuation", x: 357, y: 428 },
-    { id: "evac-riverside", type: "evacuation", x: 740, y: 406 },
-    { id: "hospital-maligaya", type: "hospital", x: 820, y: 196 },
-    { id: "school-poblacion", type: "school", x: 123, y: 382 },
-    { id: "evac-upland", type: "evacuation", x: 423, y: 140 },
-    { id: "school-san-roque", type: "school", x: 327, y: 100 },
-    { id: "evac-mabini", type: "evacuation", x: 219, y: 229 },
-    { id: "hospital-district", type: "hospital", x: 136, y: 141 },
-  ],
-
-  mapLabels: [
-    { text: "San Isidro River", x: 643, y: 155, kind: "river" },
-    { text: "Upland road", x: 358, y: 105, kind: "road" },
-    { text: "SANTA ELENA", x: 259, y: 463, kind: "barangay" },
-    { text: "RIVERSIDE", x: 648, y: 424, kind: "flood" },
-    { text: "MALIGAYA", x: 749, y: 270, kind: "barangay" },
-    { text: "POBLACION", x: 80, y: 282, kind: "barangay" },
-    { text: "MABINI", x: 328, y: 177, kind: "barangay" },
-    { text: "SAN ROQUE", x: 158, y: 65, kind: "barangay" },
   ],
 
   impact: {

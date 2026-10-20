@@ -17,7 +17,7 @@ export default function PlanningToolsPanel({ tools, horizon, onHorizonChange }) 
 
   return (
     <Panel aria-labelledby="planning-tools-title" className={styles.toolsPanel}>
-      <PanelHeading id="planning-tools-title" icon={historyIcon} title="Event replay & climate horizons">
+      <PanelHeading id="planning-tools-title" icon={historyIcon} title="Event replay & climate horizons" demo>
         <a href="#scenario-tools" className={styles.metaLink}>
           Scenario tools ↗
         </a>
